@@ -3,7 +3,7 @@ const fruits = require('../fruitBasket_FF')
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://localhost:5432/my_fruit_basket';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/my_fruit_basket';
 
 const pool = new Pool({
     connectionString
@@ -90,13 +90,13 @@ describe('The Fruit Basket function', function () {
 
         await theFruitBasket.insertFruit('Pawpaw', 0, '25.00');
 
-        await theFruitBasket.updateFruits('Pawpaw', 5, '25.00');
+        await theFruitBasket.updateFruits('Pawpaw', 5);
 
         let updated = await theFruitBasket.allFruits();
 
         assert.deepEqual(updated, [{
             fruit_name: 'Pawpaw',
-            price: '25.00',
+            price:'25.00',
             quantity: 5
         }]);
     });
@@ -105,13 +105,13 @@ describe('The Fruit Basket function', function () {
 
         await theFruitBasket.insertFruit('Berries', 2, '15.00');
 
-        await theFruitBasket.updateFruits('Berries', 4, '15.00');
+        await theFruitBasket.updateFruits('Berries', 4);
 
         let updated = await theFruitBasket.allFruits();
 
         assert.deepEqual(updated, [{
             fruit_name: 'Berries',
-            price: '15.00',
+            price:'15.00',
             quantity: 6
         }]);
     });
